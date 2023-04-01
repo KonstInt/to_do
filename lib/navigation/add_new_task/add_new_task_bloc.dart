@@ -10,18 +10,23 @@ part 'add_new_task_state.dart';
 
 class AddNewTaskBloc extends Bloc<AddNewTaskEvent, AddNewTaskState> {
   final database = Database(NativeDatabase.memory());
-  AddNewTaskBloc() : super(AddNewTaskInitial()) {
-    // ignore: void_checks
-    on<AddNewTaskEvent>((event, emit) async* {
-      if (event is AddNewTaskToDb) {
-        yield AddNewTaskLoadingState();
-        try {
-          await database.into(database.notes).insert(NotesCompanion.insert(isDone: event.item.isDone, title: event.item.title, eventDateTime: event.item.eventDateTime));
-          yield AddNewTaskLoadedState();
-        } catch (e) {
-          yield AddNewTaskFailedState();
-        }
-      }
-    });
+  AddNewTaskBloc() : super(AddNewTaskInitialState()){
+    on<AddNewTaskToDbEvent>(_onAddNewTaskToDbEvent);
   }
+
+  _onAddNewTaskToDbEvent(event, emit) async* {
+    
+      emit(AddNewTaskLoadingState());
+      try {
+        await database.into(database.notes).insert(NotesCompanion.insert(
+            isDone: event.item.isDone,
+            title: event.item.title,
+            eventDateTime: event.item.eventDateTime));
+        emit(AddNewTaskLoadedState());
+      } catch (e) {
+        emit(AddNewTaskFailedState());
+      }
+  }
+
+  
 }

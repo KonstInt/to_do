@@ -10,11 +10,15 @@ part 'home_page_state.dart';
 class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
   final database = Database(NativeDatabase.memory());
   final List<ToDoItem> listItems = [];
-  HomePageBloc() : super(HomePageInitial()) {
-    // ignore: void_checks
-    on<HomePageEvent>((event, emit) async* {
-      if (event is HomePageLoad) {
-        yield HomePageLoading();
+  HomePageBloc() : super(HomePageInitialState()) {
+    on<HomePageEvent>(_onLoadEvent);
+    on<HomePageHideEvent>(_onHideEvent);
+    on<HomePageFilterEvent>(_onFilterEvent);
+  }
+
+
+  _onLoadEvent(event, emit) async* {
+        emit(HomePageLoadingState());
         try {
           for (var element in (await database.select(database.notes).get())) {
             listItems.add(ToDoItem(
@@ -23,14 +27,44 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
                 title: element.title,
                 eventDateTime: element.eventDateTime));
           }
+          emit(HomePageLoadedState(items: listItems));
         } catch (e) {
           if (e == SocketException) {
-            yield HomePageLoadInernetError();
+            emit(HomePageLoadInernetErrorState());
           } else {
-            yield HomePageLoadDatabaseError();
+            emit(HomePageLoadDatabaseErrorState());
           }
         }
-      }
-    });
   }
+
+  _onHideEvent(event, emit) async*{
+    if(event.isHidden) {
+        List<ToDoItem> tmp = (listItems.where((x) => x.isDone!=true)).toList();
+        HomePageLoadedState(items: tmp);
+    }
+    else {
+      HomePageLoadedState(items: listItems);
+    }
+  }
+
+  _onFilterEvent(event, emit) async*{
+    switch(event.filterParam){
+      case Filter.aZ:
+      listItems.sort(((a, b) => a.title.compareTo(b.title)));
+      HomePageLoadedState(items: listItems);
+      break;
+      case Filter.zA:
+      listItems.sort(((a, b) => b.title.compareTo(a.title)));
+      break;
+      case Filter.byDate:
+      listItems.sort(((a, b) => a.id.compareTo(a.id)));
+      break;
+    }
+  }
+}
+
+enum Filter{
+  aZ,
+  zA,
+  byDate
 }

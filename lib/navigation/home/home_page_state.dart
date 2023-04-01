@@ -3,14 +3,15 @@ part of 'home_page_bloc.dart';
 @immutable
 abstract class HomePageState {}
 
-class HomePageInitial extends HomePageState {}
+class HomePageInitialState extends HomePageState {}
 
-class HomePageLoading extends HomePageState{}
+class HomePageLoadingState extends HomePageState{}
 
-class HomePageLoadedWithData extends HomePageState {}
+class HomePageLoadedState extends HomePageState {
+  final List<ToDoItem> items;
+  HomePageLoadedState({required this.items});
+}
 
-class HomePageLoadedWithoutData extends HomePageState {}
+class HomePageLoadDatabaseErrorState extends HomePageState {}
 
-class HomePageLoadDatabaseError extends HomePageState {}
-
-class HomePageLoadInernetError extends HomePageState {}
+class HomePageLoadInernetErrorState extends HomePageState {}
