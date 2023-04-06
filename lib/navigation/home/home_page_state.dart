@@ -8,7 +8,7 @@ class HomePageInitialState extends HomePageState {}
 class HomePageLoadingState extends HomePageState{}
 
 class HomePageLoadedState extends HomePageState {
-  final List<ToDoItem> items;
+  final List<ToDoItemModel> items;
   HomePageLoadedState({required this.items});
 }
 

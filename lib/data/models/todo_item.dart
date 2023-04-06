@@ -1,7 +1,7 @@
-class ToDoItem {
+class ToDoItemModel {
   int id;
-  bool isDone;
   String title;
+  bool isDone;
   DateTime eventDateTime;
-  ToDoItem({required this.id, required this.isDone, required this.title, required this.eventDateTime});
+  ToDoItemModel({required this.id, required this.isDone, required this.title, required this.eventDateTime});
 }
