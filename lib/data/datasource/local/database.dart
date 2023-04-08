@@ -34,6 +34,11 @@ class AppDb extends _$AppDb {
     return into(todoItems).insert(entry);
   }
 
+  Future<int> updateTodoItem(int id, ToDoItemModel entry)async{
+    return (todoItems.update()
+            ..where((todo) => todo.id.equals(id)))
+          .write( TodoItemsCompanion(title: Value(entry.title), done: Value(entry.isDone), date: Value(entry.eventDateTime)));
+  }
   Future<List<ToDoItemModel>> parseTodoItemsToTodoItemsModel(Future<List<TodoItem>> ll) async {
     var rr = await ll;
     return rr.map((it) => ToDoItemModel(id: it.id, title: it.title, isDone: it.done, eventDateTime: it.date ))

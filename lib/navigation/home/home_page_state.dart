@@ -12,6 +12,8 @@ class HomePageLoadedState extends HomePageState {
   HomePageLoadedState({required this.items});
 }
 
+class HomePageEmptyState extends HomePageState{}
+
 class HomePageLoadDatabaseErrorState extends HomePageState {}
 
 class HomePageLoadInernetErrorState extends HomePageState {}

@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:drift/native.dart';
 import 'package:meta/meta.dart';
 import 'package:drift/drift.dart';
-import 'package:to_do/main.dart';
+import 'package:to_do/main.dart' show db;
 import '../../data/models/todo_item.dart';
 
 
@@ -19,12 +19,6 @@ class AddNewTaskBloc extends Bloc<AddNewTaskEvent, AddNewTaskState> {
       emit(AddNewTaskLoadingState());
       try {
         db!.addTodoItemFromStrings("my castom title", false, DateTime.now());
-      //final r = await database.into(database.todoItems).insert(TodoItemsCompanion.insert(title: "my tytle", ));
-        /*await database.into(database.toDoItemsTable).insert(ToDoItemsTableCompanion.insert(
-            isDone: event.item.isDone,
-            title: event.item.title,
-            eventDateTime: event.item.eventDateTime));
-        (await database.select(database.toDoItemsTable).get()).forEach((element) => print(element),);*/
         emit(AddNewTaskLoadedState());
       } catch (e) {
         emit(AddNewTaskFailedState());
