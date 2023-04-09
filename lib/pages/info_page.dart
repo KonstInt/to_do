@@ -10,8 +10,7 @@ class InfoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var _pageSize = MediaQuery.of(context).size.height;
-
+   
     return Scaffold(
       body: SafeArea(
         child: LayoutBuilder(builder: (context, constraints) {
@@ -28,46 +27,53 @@ class InfoPage extends StatelessWidget {
                     children: [
                       Padding(
                         padding: EdgeInsets.only(left: 27.w, top: 25.w),
-                        child: Text(
-                          'Information',
-                          style: Theme.of(context).textTheme.titleLarge
-                        ),
+                        child: Text('Information',
+                            style: Theme.of(context).textTheme.titleLarge),
                       ),
                       Padding(
-                        padding:  EdgeInsets.only(left: 27.w, right: 14.w, top: 40.h),
+                        padding:
+                            EdgeInsets.only(left: 27.w, right: 14.w, top: 40.h),
                         child: Text(
                           MyStrings.info,
-                          style: Theme.of(context).textTheme.headline1!.copyWith(
-                              fontSize: 15.sp,
-                              fontWeight: FontWeight.w600,
-                              letterSpacing: -0.24.sp,
-                              color: MyColors.kSecondaryTextColor),
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline1!
+                              .copyWith(
+                                  fontSize: 15.sp,
+                                  fontWeight: FontWeight.w600,
+                                  letterSpacing: -0.24.sp,
+                                  color: MyColors.kSecondaryTextColor),
                         ),
                       ),
                       Spacer(),
                       Container(
                         width: double.infinity,
                         height: 46.h,
-                        margin: EdgeInsets.only(left: 30.r, right: 30.r, bottom: 41.r),
+                        margin: EdgeInsets.only(
+                            left: 30.r, right: 30.r, bottom: 41.r),
                         child: TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            style: ButtonStyle(
-                              shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(11.58.r),
-                                ),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          style: ButtonStyle(
+                            shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(11.58.r),
                               ),
-                              backgroundColor: MaterialStateProperty.all(MyColors.kPrimaryTextColor),
                             ),
-                            child: Text("Got it!",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(
-                                        color: MyColors.kPrimaryColor,
-                                        fontSize: 14.sp))),
+                            backgroundColor: MaterialStateProperty.all(
+                                MyColors.kPrimaryTextColor),
+                          ),
+                          child: Text(
+                            "Got it!",
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(
+                                    color: MyColors.kPrimaryLightColor,
+                                    fontSize: 14.sp),
+                          ),
+                        ),
                       ),
                     ]),
               ),

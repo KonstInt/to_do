@@ -69,14 +69,19 @@ class HomeItemsWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(item.title,
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      decoration: item.isDone
-                          ? TextDecoration.lineThrough
-                          : TextDecoration.none,
-                      color: item.isDone
-                          ? MyColors.kLighterTextColor
-                          : MyColors.kSecondaryTextColor)),
+             
+              SizedBox(
+                width: 250.w,
+                child: Text(item.title,
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          decoration: item.isDone
+                              ? TextDecoration.lineThrough
+                              : TextDecoration.none,
+                          color: item.isDone
+                              ? MyColors.kLighterTextColor
+                              : MyColors.kSecondaryTextColor),),
+              ),
+              
               SizedBox(height: 5.r,),
               Text(
                 DateFormat('dd.MM.yyyy hh:mm').format(item.eventDateTime),

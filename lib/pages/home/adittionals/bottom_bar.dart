@@ -14,7 +14,7 @@ class BottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 65.h,
+        height: 66.h,
         decoration: BoxDecoration(
             color: Colors.white,
             border: Border(
@@ -28,7 +28,7 @@ class BottomBar extends StatelessWidget {
             BottomNavigationBarItem(
               icon: SvgPicture.asset(
                 "assets/icons/az_filter.svg",
-                width: 30.r,
+                width: 28.r,
                 color: selectedIndex == 0
                     ? Theme.of(context).primaryColor
                     : Theme.of(context).primaryIconTheme.color,
@@ -38,7 +38,7 @@ class BottomBar extends StatelessWidget {
             BottomNavigationBarItem(
               icon: SvgPicture.asset(
                 "assets/icons/za_filter.svg",
-                width: 30.r,
+                width: 28.r,
                 color: selectedIndex == 1
                     ? Theme.of(context).primaryColor
                     : Theme.of(context).primaryIconTheme.color,
@@ -48,7 +48,7 @@ class BottomBar extends StatelessWidget {
             BottomNavigationBarItem(
               icon: SvgPicture.asset(
                 "assets/icons/dt_filter.svg",
-                width: 30.r,
+                width: 28.r,
                 color: selectedIndex == 2
                     ? Theme.of(context).primaryColor
                     : Theme.of(context).primaryIconTheme.color,

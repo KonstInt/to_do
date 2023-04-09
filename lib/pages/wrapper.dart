@@ -10,15 +10,8 @@ class Wrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => HomePageBloc(),
-        ),
-        BlocProvider(
-          create: (context) => AddNewTaskBloc(),
-        ),
-      ],
-      child: HomePage(title: "title"));
+    return BlocProvider(
+        create: (context) => HomePageBloc(),
+         child: HomePage(title: "title"));
   }
 }

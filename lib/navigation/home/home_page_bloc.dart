@@ -1,23 +1,25 @@
 import 'dart:io';
-import 'package:drift/native.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:to_do/data/models/todo_item.dart';
 import 'package:to_do/main.dart' show db;
-import 'package:to_do/pages/home/home_page.dart';
 
 part 'home_page_event.dart';
 part 'home_page_state.dart';
 
 class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
   //final database = Database(NativeDatabase.memory());
-
+  Filter filterOption = Filter.aZ;
   List<ToDoItemModel> listItems = [];
+  List<ToDoItemModel> listTmp = [];
+  bool isComlitedHide = false;
+
   HomePageBloc() : super(HomePageInitialState()) {
     on<HomePageLoadEvent>(_onLoadEvent);
     on<HomePageHideEvent>(_onHideEvent);
     on<HomePageFilterEvent>(_onFilterEvent);
   }
+
 
   _onLoadEvent(event, emit) async {
     emit(HomePageLoadingState());
@@ -25,7 +27,8 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
       listItems =
           await db!.parseTodoItemsToTodoItemsModel(db!.allTodoItemsEntries);
       if (listItems.isNotEmpty) {
-        emit(HomePageLoadedState(items: listItems));
+        _FilterFunction();
+        emit(HomePageLoadedState(items: listTmp, isHide: isComlitedHide));
       } else {
         emit(HomePageEmptyState());
         //emit(HomePageLoadedState(items: listItems));
@@ -40,33 +43,38 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
   }
 
   _onHideEvent(event, emit) async {
-    if (event.isHidden) {
-      List<ToDoItemModel> tmp =
-          (listItems.where((x) => x.isDone != true)).toList();
-      HomePageLoadedState(items: tmp);
-    } else {
-      HomePageLoadedState(items: listItems);
-    }
+    emit(HomePageLoadingState());
+    isComlitedHide=!isComlitedHide;
+    _FilterFunction();
+    emit(HomePageLoadedState(items: listTmp, isHide: isComlitedHide ));
   }
 
   _onFilterEvent(event, emit) async {
     emit(HomePageLoadingState());
-    switch (event.filterParam) {
+    filterOption = event.filterParam;
+    _FilterFunction();
+    if (listItems.isNotEmpty) {
+      emit(HomePageLoadedState(items: listTmp, isHide: isComlitedHide));
+    } else {
+      emit(HomePageEmptyState());
+    }
+  }
+
+  _FilterFunction(){
+    switch (filterOption) {
       case Filter.aZ:
-        listItems.sort(((a, b) => a.title.compareTo(b.title)));
+         listItems.sort(((a, b) => a.title.compareTo(b.title)));
         break;
       case Filter.zA:
         listItems.sort(((a, b) => b.title.compareTo(a.title)));
         break;
       case Filter.byDate:
-        listItems.sort(((a, b) => a.id.compareTo(a.id)));
+        listItems.sort(((a, b) => a.eventDateTime.compareTo(b.eventDateTime)));
         break;
     }
-    if (listItems.isNotEmpty) {
-      emit(HomePageLoadedState(items: listItems));
-    } else {
-      emit(HomePageEmptyState());
-    }
+    listTmp = listItems.where((element) => !element.isDone).toList() 
+    + (isComlitedHide?[]:listItems.where((element) => element.isDone).toList());
+       
   }
 }
 

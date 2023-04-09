@@ -7,8 +7,10 @@ static const Color kLinkTextColor = Color(0xFF007AFF);
 static const Color kSecondaryTextColor = Color.fromARGB(255, 115, 115, 115);
 static const Color kLighterTextColor = Color.fromARGB(100, 115, 115, 115);
 static const Color kPriceBackgroundColor = Color(0xFFF9E000);
-static const Color kPrimaryColor  = Color(0xffFFFFFF);
+static const Color kPrimaryLightColor  = Color(0xffFFFFFF);
+static const Color kPrimaryColor  = Color(0xFF000000);
 static const Color kIconColor = Color(0xffFFFFFF);
+static const Color kLiteButtonColor  = Color.fromARGB(40, 118, 118, 128);
 
 }
 

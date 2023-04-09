@@ -14,11 +14,11 @@ class AddNewTaskBloc extends Bloc<AddNewTaskEvent, AddNewTaskState> {
     on<AddNewTaskToDbEvent>(_onAddNewTaskToDbEvent);
   }
 
-  _onAddNewTaskToDbEvent(event, emit) async {
+  _onAddNewTaskToDbEvent(AddNewTaskToDbEvent event, emit) async {
       
       emit(AddNewTaskLoadingState());
       try {
-        db!.addTodoItemFromStrings("my castom title", false, DateTime.now());
+        db!.addTodoItemFromStrings(event.item.title, event.item.isDone, event.item.eventDateTime);
         emit(AddNewTaskLoadedState());
       } catch (e) {
         emit(AddNewTaskFailedState());
