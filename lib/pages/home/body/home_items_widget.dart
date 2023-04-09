@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:to_do/data/models/todo_item.dart';
@@ -10,13 +8,13 @@ import '../../../navigation/edit_task/edit_task_bloc.dart';
 import '../../../navigation/home/home_page_bloc.dart';
 
 class HomeItemsWidget extends StatelessWidget {
-  List<ToDoItemModel> items;
-  HomeItemsWidget({super.key, required this.items});
+  final List<ToDoItemModel> items;
+  const HomeItemsWidget({super.key, required this.items});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 10),
+      margin: EdgeInsets.only(top: 10.h),
       child: ListView.builder(
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
@@ -29,7 +27,7 @@ class HomeItemsWidget extends StatelessWidget {
 
   Widget buildItems(ToDoItemModel item, BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 21),
+      margin: EdgeInsets.only(top: 21.h),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -43,7 +41,7 @@ class HomeItemsWidget extends StatelessWidget {
                     homeBloc.add(HomePageLoadEvent());
                   }
                   if (state is EditFaleState) {
-                    print("ПИЗДА ЕБУчий БЛОК");
+                    //print("ПИЗДА ЕБУчий БЛОК");
                   }
                 },
                 child: SizedBox(
@@ -69,7 +67,6 @@ class HomeItemsWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-             
               SizedBox(
                 width: 250.w,
                 child: Text(item.title,
@@ -81,7 +78,6 @@ class HomeItemsWidget extends StatelessWidget {
                               ? MyColors.kLighterTextColor
                               : MyColors.kSecondaryTextColor),),
               ),
-              
               SizedBox(height: 5.r,),
               Text(
                 DateFormat('dd.MM.yyyy hh:mm').format(item.eventDateTime),

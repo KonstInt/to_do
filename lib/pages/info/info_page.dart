@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../utils/constants.dart';
+import '../../utils/constants.dart';
 
 class InfoPage extends StatelessWidget {
   const InfoPage({super.key});
@@ -45,7 +43,7 @@ class InfoPage extends StatelessWidget {
                                   color: MyColors.kSecondaryTextColor),
                         ),
                       ),
-                      Spacer(),
+                      const Spacer(),
                       Container(
                         width: double.infinity,
                         height: 46.h,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MyColors{
 static const Color kPrimaryTextColor = Color(0xFF000000);
@@ -11,7 +10,6 @@ static const Color kPrimaryLightColor  = Color(0xffFFFFFF);
 static const Color kPrimaryColor  = Color(0xFF000000);
 static const Color kIconColor = Color(0xffFFFFFF);
 static const Color kLiteButtonColor  = Color.fromARGB(40, 118, 118, 128);
-
 }
 
 

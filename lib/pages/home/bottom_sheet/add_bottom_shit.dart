@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
+import 'package:to_do/pages/home/bottom_sheet/bottom_sheet_app_bar.dart';
 import 'package:to_do/utils/constants.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../data/models/todo_item.dart';
-import '../../navigation/add_new_task/add_new_task_bloc.dart';
-import '../../navigation/home/home_page_bloc.dart';
+import '../../../data/models/todo_item.dart';
+import '../../../navigation/add_new_task/add_new_task_bloc.dart';
+import '../../../navigation/home/home_page_bloc.dart';
 
 class AddBottomSheet extends StatefulWidget {
-  AddBottomSheet({super.key});
+  const AddBottomSheet({super.key});
 
   @override
   State<AddBottomSheet> createState() => _AddBottomSheetState();
@@ -39,7 +40,7 @@ class _AddBottomSheetState extends State<AddBottomSheet> {
                   homePageBloc.add(HomePageLoadEvent());
                   Navigator.pop(context);
                 } else {
-                  print("Ну пизда");
+                  //print("Ну пизда");
                 }
               },
               child: Builder(builder: (context) {
@@ -47,53 +48,7 @@ class _AddBottomSheetState extends State<AddBottomSheet> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.only(top: 10.0.r, bottom: 3.r),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: TextButton(
-                                onPressed: () => Navigator.pop(context),
-                                child: Row(
-                                  children: [
-                                    SvgPicture.asset(
-                                      "assets/icons/back_row.svg",
-                                      width: 12.r,
-                                      height: 21.r,
-                                      color: MyColors.kLinkTextColor,
-                                    ),
-                                    SizedBox(width: 5.w),
-                                    Text(
-                                      'Close',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodySmall!
-                                          .copyWith(
-                                              color: MyColors.kLinkTextColor,
-                                              fontSize: 17.sp),
-                                    ),
-                                  ],
-                                )),
-                          ),
-                          const Spacer(),
-                          Text(
-                            'Title',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium!
-                                .copyWith(
-                                  fontSize: 17.spMax,
-                                  color: MyColors.kPrimaryTextColor,
-                                ),
-                          ),
-                          const Spacer(
-                            flex: 2,
-                          )
-                        ],
-                      ),
-                    ),
+                    BottomSheetAppBar(),
                     Divider(
                       thickness: 1.h,
                       height: 0.1.h,
@@ -133,7 +88,7 @@ class _AddBottomSheetState extends State<AddBottomSheet> {
                                     controller: myController,
                                     maxLines: null,
                                     decoration: InputDecoration(
-                                      border: UnderlineInputBorder(),
+                                      border: const UnderlineInputBorder(),
                                       isDense: true,
                                       hintText: 'Lorem ipsum dolor sit amet',
                                       contentPadding: EdgeInsets.fromLTRB(
@@ -186,7 +141,7 @@ class _AddBottomSheetState extends State<AddBottomSheet> {
                                 backgroundColor: MaterialStateProperty.all(
                                     MyColors.kLiteButtonColor),
                               ),
-                              child: Container(
+                              child: SizedBox(
                                 height: 28.h,
                                 width: 70.w,
                                 child: Center(
@@ -246,7 +201,7 @@ class _AddBottomSheetState extends State<AddBottomSheet> {
                                 backgroundColor: MaterialStateProperty.all(
                                     MyColors.kLiteButtonColor),
                               ),
-                              child: Container(
+                              child: SizedBox(
                                 height: 30.h,
                                 width: 160.w,
                                 child: Center(
@@ -296,7 +251,7 @@ class _AddBottomSheetState extends State<AddBottomSheet> {
                                   : MyColors.kPrimaryColor),
                         ),
                         child: Center(
-                          child: Container(
+                          child: SizedBox(
                             height: 30.h,
                             width: 160.w,
                             child: Center(

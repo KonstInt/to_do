@@ -9,7 +9,7 @@ class HomePageLoadingState extends HomePageState{}
 
 class HomePageLoadedState extends HomePageState {
   final List<ToDoItemModel> items;
-  bool isHide;
+  final bool isHide;
   HomePageLoadedState({required this.items, required this.isHide});
 }
 

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:to_do/utils/constants.dart';
-import '../../navigation/home/home_page_bloc.dart';
+import '../../../navigation/home/home_page_bloc.dart';
 
 class HeaderWidget extends StatelessWidget {
-  HeaderWidget({super.key});
+  const HeaderWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class HeaderWidget extends StatelessWidget {
           Text("My tasks", style: Theme.of(context).textTheme.titleLarge),
           BlocBuilder<HomePageBloc, HomePageState>(
             builder: (context, state) {
-              if (state is HomePageLoadedState)
+              if (state is HomePageLoadedState) {
                 return TextButton(
                   onPressed: () {
                     final homePageBloc = context.read<HomePageBloc>();
@@ -31,8 +31,9 @@ class HeaderWidget extends StatelessWidget {
                         .copyWith(color: MyColors.kLinkTextColor),
                   ),
                 );
-              else
+              } else {
                 return Container();
+              }
             },
           ),
         ],

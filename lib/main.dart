@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:to_do/pages/wrapper.dart';
+import 'package:to_do/wrapper.dart';
 import 'package:to_do/utils/theme.dart';
 import 'data/datasource/local/database.dart';
 import 'pages/home/home_page.dart';

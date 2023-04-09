@@ -7,7 +7,7 @@ import 'package:flutter_svg/svg.dart';
 import '../../../utils/constants.dart';
 
 class BottomBar extends StatelessWidget {
-  final selectedIndex;
+  final int selectedIndex;
   final onItemTapped;
   const BottomBar({super.key, required this.selectedIndex, required this.onItemTapped});
 

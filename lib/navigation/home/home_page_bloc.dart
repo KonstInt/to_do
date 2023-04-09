@@ -8,7 +8,6 @@ part 'home_page_event.dart';
 part 'home_page_state.dart';
 
 class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
-  //final database = Database(NativeDatabase.memory());
   Filter filterOption = Filter.aZ;
   List<ToDoItemModel> listItems = [];
   List<ToDoItemModel> listTmp = [];
@@ -27,7 +26,7 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
       listItems =
           await db!.parseTodoItemsToTodoItemsModel(db!.allTodoItemsEntries);
       if (listItems.isNotEmpty) {
-        _FilterFunction();
+        _filterFunction();
         emit(HomePageLoadedState(items: listTmp, isHide: isComlitedHide));
       } else {
         emit(HomePageEmptyState());
@@ -45,14 +44,14 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
   _onHideEvent(event, emit) async {
     emit(HomePageLoadingState());
     isComlitedHide=!isComlitedHide;
-    _FilterFunction();
+    _filterFunction();
     emit(HomePageLoadedState(items: listTmp, isHide: isComlitedHide ));
   }
 
   _onFilterEvent(event, emit) async {
     emit(HomePageLoadingState());
     filterOption = event.filterParam;
-    _FilterFunction();
+    _filterFunction();
     if (listItems.isNotEmpty) {
       emit(HomePageLoadedState(items: listTmp, isHide: isComlitedHide));
     } else {
@@ -60,7 +59,7 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
     }
   }
 
-  _FilterFunction(){
+  _filterFunction(){
     switch (filterOption) {
       case Filter.aZ:
          listItems.sort(((a, b) => a.title.compareTo(b.title)));

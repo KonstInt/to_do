@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:to_do/navigation/home/home_page_bloc.dart';
 import 'package:to_do/pages/home/adittionals/bottom_bar.dart';
-import 'package:to_do/pages/home/header_widget.dart';
+import 'package:to_do/pages/home/header/header_widget.dart';
 import 'package:to_do/pages/home/body/home_items_widget.dart';
 import 'adittionals/floating_buttons.dart';
 import 'body/no_items_widget.dart';
@@ -21,14 +21,8 @@ class _HomePageState extends State<HomePage> {
   late HomePageBloc homePageBloc;
   int _selectedIndex = 0;
   bool isVisibleFAB = true;
-  bool isVisibleHide = true;
-  bool isDoneShow = false;
 
-  void _changeIsVBHide(){
-    setState(() {
-      isVisibleHide = !isVisibleHide;
-    });
-  }
+  
   void _onItemTapped(int index) {
     setState(() {
       switch(index){
@@ -76,7 +70,7 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  HeaderWidget(),
+                  const HeaderWidget(),
                   BlocBuilder<HomePageBloc, HomePageState>(
                     builder: (context, state) {
                       if (state is HomePageLoadingState) {
