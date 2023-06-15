@@ -226,19 +226,22 @@ class _AddBottomSheetState extends State<AddBottomSheet> {
                       padding:
                           EdgeInsets.only(left: 30.w, right: 29.0.w, top: 57.h),
                       child: TextButton(
-                        onPressed: myController.text.isEmpty?null:() {
-                          final addNewTaskBloc = context.read<AddNewTaskBloc>();
-                          addNewTaskBloc.add(
-                            AddNewTaskToDbEvent(
-                              item: ToDoItemModel(
-                                id: -1,
-                                isDone: false,
-                                title: myController.text,
-                                eventDateTime: dateTime,
-                              ),
-                            ),
-                          );
-                        },
+                        onPressed: myController.text.isEmpty
+                            ? null
+                            : () {
+                                final addNewTaskBloc =
+                                    context.read<AddNewTaskBloc>();
+                                addNewTaskBloc.add(
+                                  AddNewTaskToDbEvent(
+                                    item: ToDoItemModel(
+                                      id: -1,
+                                      isDone: false,
+                                      title: myController.text,
+                                      eventDateTime: dateTime,
+                                    ),
+                                  ),
+                                );
+                              },
                         style: ButtonStyle(
                           shape: MaterialStateProperty.all(
                             RoundedRectangleBorder(

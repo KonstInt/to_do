@@ -32,7 +32,7 @@ class InfoPage extends StatelessWidget {
                         padding:
                             EdgeInsets.only(left: 27.w, right: 14.w, top: 40.h),
                         child: Text(
-                          MyStrings.info,
+                          MyStrings.info+MyStrings.info,
                           style: Theme.of(context)
                               .textTheme
                               .headline1!
